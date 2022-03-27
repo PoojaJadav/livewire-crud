@@ -63,7 +63,7 @@ class MakeLivewireCRUDCommand extends Command
         $this->call('make:controller', [
             'name'    => "{$model}Controller",
             '--model' => $model,
-            '--type'  => 'livewire',
+            //            '--type'  => 'livewire', // TODO
         ]);
 
         $controllerPath = app_path("Http/Controllers/{$model}Controller.php");
@@ -116,11 +116,11 @@ class MakeLivewireCRUDCommand extends Command
         ));
 
         if (!File::exists($path = app_path('Http/Livewire/WithSorting.php'))) {
-            File::copy($path, $stubFolder . 'livewire/traits/WithSorting.stub');
+            File::put($path, file_get_contents($stubFolder . 'livewire/traits/WithSorting.stub'));
         }
 
         if (!File::exists($path = app_path('Http/Livewire/ModelManager.php'))) {
-            File::copy($path, $stubFolder . 'livewire/traits/ModelManager.stub');
+            File::put($path, file_get_contents($stubFolder . 'livewire/traits/ModelManager.stub'));
         }
 
         $this->info('Livewire components / views created successfully.');
