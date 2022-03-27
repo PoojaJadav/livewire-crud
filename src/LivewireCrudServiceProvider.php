@@ -45,6 +45,8 @@ class LivewireCrudServiceProvider extends ServiceProvider
      */
     protected function bootForConsole()
     {
+        $this->loadViewsFrom(__DIR__ . '/../resources/views', 'livewire-crud');
+
         // Registering package components
         $this->loadViewComponentsAs('livewirecrud', [
             Search::class,

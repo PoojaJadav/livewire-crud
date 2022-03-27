@@ -13,7 +13,7 @@ class Search extends Component
      */
     public function __construct()
     {
-        //
+
     }
 
     /**
@@ -23,6 +23,6 @@ class Search extends Component
      */
     public function render()
     {
-        return view('components.search');
+        return view('livewire-crud::components.search');
     }
 }
