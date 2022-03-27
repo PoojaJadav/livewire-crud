@@ -5,6 +5,8 @@ namespace Poojajadav\LivewireCrud;
 use Illuminate\Support\ServiceProvider;
 use Poojajadav\LivewireCrud\Commands\MakeLivewireCRUDCommand;
 use Poojajadav\LivewireCrud\Commands\StubsCommand;
+use Poojajadav\LivewireCrud\View\Components\Search;
+use Poojajadav\LivewireCrud\View\Components\Sort;
 
 class LivewireCrudServiceProvider extends ServiceProvider
 {
@@ -43,6 +45,12 @@ class LivewireCrudServiceProvider extends ServiceProvider
      */
     protected function bootForConsole()
     {
+        // Registering package components
+        $this->loadViewComponentsAs('livewirecrud', [
+            Search::class,
+            Sort::class
+        ]);
+
         // Registering package commands.
         $this->commands([
             MakeLivewireCRUDCommand::class,
