@@ -1,0 +1,46 @@
+<?php
+
+namespace {{ namespace }};
+
+use {{ namespacedModel }};
+use {{ rootNamespace }}Http\Controllers\Controller;
+
+class {{ class }} extends Controller
+{
+    public function index()
+    {
+        $this->authorize('viewAny', {{ model }}::class);
+
+        return view('DIRECTORY.index');
+    }
+
+    public function create()
+    {
+        $this->authorize('create', {{ model }}::class);
+
+        return view('DIRECTORY.create');
+    }
+
+    public function show({{ model }} ${{ modelVariable }})
+    {
+        $this->authorize('view', ${{ modelVariable }});
+
+        return view('DIRECTORY.show', compact('{{ modelVariable }}'));
+    }
+
+    public function edit({{ model }} ${{ modelVariable }})
+    {
+        $this->authorize('update', ${{ modelVariable }});
+
+        return view('DIRECTORY.edit', compact('{{ modelVariable }}'));
+    }
+
+    public function destroy({{ model }} ${{ modelVariable }})
+    {
+         $this->authorize('delete', ${{ modelVariable }});
+
+          ${{ modelVariable }}->delete();
+
+         return back();
+    }
+}
