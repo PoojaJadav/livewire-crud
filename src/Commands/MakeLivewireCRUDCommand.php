@@ -3,6 +3,7 @@
 namespace Poojajadav\LivewireCrud\Commands;
 
 use Illuminate\Console\Command;
+use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Facades\File;
 
 class MakeLivewireCRUDCommand extends Command
@@ -43,6 +44,17 @@ class MakeLivewireCRUDCommand extends Command
         $pluralDirectory = strtolower($pluralModel);
         $stubFolder = __DIR__ . '/../stubs/';
 
+        if (!File::exists($path = base_path('stubs/controller.livewire.stub'))) {
+            if (!is_dir($stubsPath = base_path('stubs'))) {
+                (new Filesystem)->makeDirectory($stubsPath);
+            }
+
+            file_put_contents(
+                $path,
+                file_get_contents($stubFolder . 'controller.livewire.stub')
+            );
+        }
+
         $replace = [
             '{{ variable }}'        => '$' . strtolower($model),
             '{{ model }}'           => $model,
@@ -63,7 +75,7 @@ class MakeLivewireCRUDCommand extends Command
         $this->call('make:controller', [
             'name'    => "{$model}Controller",
             '--model' => $model,
-            //            '--type'  => 'livewire', // TODO
+            '--type'  => 'livewire',
         ]);
 
         $controllerPath = app_path("Http/Controllers/{$model}Controller.php");
