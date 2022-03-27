@@ -41,7 +41,7 @@ class MakeLivewireCRUDCommand extends Command
         $model = ucfirst($this->argument('model'));
         $pluralModel = str_plural($model);
         $pluralDirectory = strtolower($pluralModel);
-        $stubFolder = __DIR__ . '/../../stubs/';
+        $stubFolder = __DIR__ . '/../stubs/';
 
         $replace = [
             '{{ variable }}'        => '$' . strtolower($model),

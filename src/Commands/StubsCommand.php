@@ -20,7 +20,7 @@ class StubsCommand extends Command
             (new Filesystem)->makeDirectory($stubsPath);
         }
 
-        File::copyDirectory(__DIR__.'/../../stubs', $stubsPath);
+        File::copyDirectory(__DIR__ . '/../stubs', $stubsPath);
 
         $this->info('Stubs published successfully.');
     }
