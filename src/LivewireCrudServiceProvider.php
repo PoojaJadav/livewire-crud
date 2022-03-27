@@ -3,6 +3,8 @@
 namespace Poojajadav\LivewireCrud;
 
 use Illuminate\Support\ServiceProvider;
+use Poojajadav\LivewireCrud\Commands\MakeLivewireCRUDCommand;
+use Poojajadav\LivewireCrud\Commands\StubsCommand;
 
 class LivewireCrudServiceProvider extends ServiceProvider
 {
@@ -23,11 +25,28 @@ class LivewireCrudServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        // Publishing is only necessary when using the CLI.
+        if ($this->app->runningInConsole()) {
+            $this->bootForConsole();
+        }
     }
 
     public function provides()
     {
         return ['livewire-crud'];
+    }
+
+    /**
+     * Console-specific booting.
+     *
+     * @return void
+     */
+    protected function bootForConsole()
+    {
+        // Registering package commands.
+        $this->commands([
+            MakeLivewireCRUDCommand::class,
+            StubsCommand::class
+        ]);
     }
 }

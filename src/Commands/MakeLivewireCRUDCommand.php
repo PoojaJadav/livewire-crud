@@ -1,6 +1,6 @@
 <?php
 
-namespace LivewireCrud\Commands;
+namespace Poojajadav\LivewireCrud\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
@@ -41,6 +41,7 @@ class MakeLivewireCRUDCommand extends Command
         $model = ucfirst($this->argument('model'));
         $pluralModel = str_plural($model);
         $pluralDirectory = strtolower($pluralModel);
+        $stubFolder = __DIR__ . '/../../stubs/';
 
         $replace = [
             '{{ variable }}'        => '$' . strtolower($model),
@@ -88,7 +89,7 @@ class MakeLivewireCRUDCommand extends Command
         foreach ($views as $view) {
             File::put(
                 resource_path("views/$pluralDirectory/$view.blade.php"),
-                str_replace(array_keys($replace), array_values($replace), file_get_contents(base_path("stubs/livewire/views/$view.stub")))
+                str_replace(array_keys($replace), array_values($replace), file_get_contents($stubFolder . "livewire/views/$view.stub"))
             );
         }
         $this->info('Views created successfully.');
@@ -101,25 +102,25 @@ class MakeLivewireCRUDCommand extends Command
         File::makeDirectory($componentViewPath, 0777, true, true);
 
         File::put($componentPath . '/Index.php', str_replace(
-            array_keys($replace), array_values($replace), file_get_contents(base_path('stubs/livewire/components/Index.stub'))
+            array_keys($replace), array_values($replace), file_get_contents($stubFolder . 'livewire/components/Index.stub')
         ));
         File::put($componentPath . '/Manage.php', str_replace(
-            array_keys($replace), array_values($replace), file_get_contents(base_path('stubs/livewire/components/Manage.stub'))
+            array_keys($replace), array_values($replace), file_get_contents($stubFolder . 'livewire/components/Manage.stub')
         ));
 
         File::put($componentViewPath . '/index.blade.php', str_replace(
-            array_keys($replace), array_values($replace), file_get_contents(base_path('stubs/livewire/component-views/index.stub'))
+            array_keys($replace), array_values($replace), file_get_contents($stubFolder . 'livewire/component-views/index.stub')
         ));
         File::put($componentViewPath . '/manage.blade.php', str_replace(
-            array_keys($replace), array_values($replace), file_get_contents(base_path('stubs/livewire/component-views/manage.stub'))
+            array_keys($replace), array_values($replace), file_get_contents($stubFolder . 'livewire/component-views/manage.stub')
         ));
 
         if (!File::exists($path = app_path('Http/Livewire/WithSorting.php'))) {
-            File::copy($path, base_path('stubs/livewire/traits/WithSorting.stub'));
+            File::copy($path, $stubFolder . 'livewire/traits/WithSorting.stub');
         }
 
         if (!File::exists($path = app_path('Http/Livewire/ModelManager.php'))) {
-            File::copy($path, base_path('stubs/livewire/traits/ModelManager.stub'));
+            File::copy($path, $stubFolder . 'livewire/traits/ModelManager.stub');
         }
 
         $this->info('Livewire components / views created successfully.');
