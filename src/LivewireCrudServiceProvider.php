@@ -47,7 +47,7 @@ class LivewireCrudServiceProvider extends ServiceProvider
      */
     protected function bootForConsole()
     {
-        $this->loadViewsFrom(__DIR__ . '../resources/views/', 'livewire-crud');
+        $this->loadViewsFrom(__DIR__ . '/../resources/views/', 'livewire-crud');
 
 //        $this->registerBladeComponents();
 
