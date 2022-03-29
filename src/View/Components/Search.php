@@ -13,6 +13,6 @@ class Search extends Component
      */
     public function render()
     {
-        return view('livewireCrud::components.search');
+        return view('livewire-crud::components.search');
     }
 }

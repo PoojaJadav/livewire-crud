@@ -13,6 +13,6 @@ class Sort extends Component
      */
     public function render()
     {
-        return view('livewireCrud::components.sort');
+        return view('livewire-crud::components.sort');
     }
 }
