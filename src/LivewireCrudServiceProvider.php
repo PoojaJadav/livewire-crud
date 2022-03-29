@@ -49,9 +49,9 @@ class LivewireCrudServiceProvider extends ServiceProvider
     {
         $this->loadViewsFrom(__DIR__ . '/../resources/views/', 'livewire-crud');
 
-        $this->registerBladeComponents();
+//        $this->registerBladeComponents();
 
-//        $this->configureComponents();
+        $this->configureComponents();
 
         // Registering package components
         /*$this->loadViewComponentsAs('wire', [
