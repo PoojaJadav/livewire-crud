@@ -49,15 +49,15 @@ class LivewireCrudServiceProvider extends ServiceProvider
     {
         $this->loadViewsFrom(__DIR__ . '/../resources/views/', 'livewire-crud');
 
-//        $this->registerBladeComponents();
+        $this->registerBladeComponents();
 
 //        $this->configureComponents();
 
         // Registering package components
-        $this->loadViewComponentsAs('wire', [
+        /*$this->loadViewComponentsAs('wire', [
             Search::class,
             Sort::class
-        ]);
+        ]);*/
 
         // Registering package commands.
         $this->commands([
@@ -70,11 +70,11 @@ class LivewireCrudServiceProvider extends ServiceProvider
     {
         $this->callAfterResolving(BladeCompiler::class, function (BladeCompiler $blade) {
             $components = [
-                'input'    => [
+                'search'    => [
                     'class' => Search::class,
                     'alias' => 'search',
                 ],
-                'textarea' => [
+                'sort' => [
                     'class' => Sort::class,
                     'alias' => 'sort',
                 ]
