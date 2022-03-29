@@ -42,7 +42,7 @@ class MakeLivewireCRUDCommand extends Command
         $model = ucfirst($this->argument('model'));
         $pluralModel = str_plural($model);
         $pluralDirectory = strtolower($pluralModel);
-        $stubFolder = __DIR__ . '/../stubs/';
+        $stubFolder = __DIR__ . '/../../stubs/';
 
         if (!File::exists($path = base_path('stubs/controller.livewire.stub'))) {
             if (!is_dir($stubsPath = base_path('stubs'))) {
@@ -128,11 +128,11 @@ class MakeLivewireCRUDCommand extends Command
         ));
 
         if (!File::exists($path = app_path('Http/Livewire/WithSorting.php'))) {
-            File::put($path, file_get_contents($stubFolder . 'livewire/traits/WithSorting.stub'));
+            File::copy($stubFolder . 'livewire/traits/WithSorting.stub', $path);
         }
 
         if (!File::exists($path = app_path('Http/Livewire/ModelManager.php'))) {
-            File::put($path, file_get_contents($stubFolder . 'livewire/traits/ModelManager.stub'));
+            File::copy($stubFolder . 'livewire/traits/ModelManager.stub', $path);
         }
 
         $this->info('Livewire components / views created successfully.');
