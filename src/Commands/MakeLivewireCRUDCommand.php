@@ -13,7 +13,7 @@ class MakeLivewireCRUDCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'make:livewire-crud {model}';
+    protected $signature = 'livewire:crud {model}';
 
     /**
      * The console command description.
