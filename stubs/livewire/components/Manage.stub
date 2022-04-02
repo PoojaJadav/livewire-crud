@@ -2,13 +2,13 @@
 
 namespace App\Http\Livewire\{{ pluralModel }};
 
-use App\Http\Livewire\{{ manageTrait }};
+use App\Http\Livewire\ModelManager;
 use App\Models\{{ model }};
 use Livewire\Component;
 
 class Manage extends Component
 {
-    use {{ manageTrait }};
+    use ModelManager;
 
      public static $modelName = {{ model }}::class;
 

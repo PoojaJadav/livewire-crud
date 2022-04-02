@@ -62,7 +62,6 @@ class MakeLivewireCRUDCommand extends Command
             '{{ pluralModel }}'     => $pluralModel,
             '{{ pluralDirectory }}' => $pluralDirectory,
             'DIRECTORY'             => $pluralDirectory,
-            '{{ manageTrait }}'     => $hasModal ? 'ManageModal' : 'ModelManager',
         ];
 
         // model, migration, seeder, factory
@@ -158,10 +157,6 @@ class MakeLivewireCRUDCommand extends Command
 
         if (!File::exists($path = app_path('Http/Livewire/HasModal.php'))) {
             File::copy($stubFolder . 'livewire/traits/HasModal.stub', $path);
-        }
-
-        if (!File::exists($path = app_path('Http/Livewire/ManageModal.php'))) {
-            File::copy($stubFolder . 'livewire/traits/ManageModal.stub', $path);
         }
 
         $this->info('Livewire components / views created successfully.');
