@@ -53,6 +53,7 @@ class LivewireCrudServiceProvider extends ServiceProvider
     protected function configureComponents()
     {
         $this->callAfterResolving(BladeCompiler::class, function () {
+            $this->registerComponent('modal');
             $this->registerComponent('icons.search');
             $this->registerComponent('icons.sort');
         });
@@ -60,6 +61,6 @@ class LivewireCrudServiceProvider extends ServiceProvider
 
     protected function registerComponent(string $component)
     {
-        Blade::component('livewire-crud::components.' . $component, 'wire-'.$component);
+        Blade::component('livewire-crud::components.' . $component, 'wire-' . $component);
     }
 }

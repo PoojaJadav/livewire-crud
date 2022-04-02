@@ -2,15 +2,15 @@
 
 namespace App\Http\Livewire\{{ pluralModel }};
 
-use App\Http\Livewire\ModelManager;
+use App\Http\Livewire\{{ manageTrait }};
 use App\Models\{{ model }};
 use Livewire\Component;
 
 class Manage extends Component
 {
-    use ModelManager;
+    use {{ manageTrait }};
 
-    public {{ model }} $model;
+     public static $modelName = {{ model }}::class;
 
     public function mount({{ model }} $model = null)
     {

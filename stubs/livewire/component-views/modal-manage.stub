@@ -1,0 +1,32 @@
+<div>
+    <x-wire-modal maxWidth="md" wire:model="show" submit="submit">
+        <x-slot name="title">
+            @if($this->editing)
+                @lang('Edit {{ model }}')
+            @else
+                @lang('Create {{ model }}')
+            @endif
+        </x-slot>
+        <div class="space-y-4 lg:space-y-6">
+            <div class="flex flex-col md:flex-row items-center md:items-start">
+                <label class="mb-1 md:mb-0 md:py-2.5 flex-shrink-0 w-full md:w-40 lg:w-52 xl:w-56 xl:w-64">
+                    {{__('Title')}}
+                </label>
+                <div class="w-full flex-grow md:pl-6 xl:pl-0">
+                    <x-jet-input type="text"
+                                 wire:model.defer="model.title"
+                                 placeholder="{{__('Title')}}"
+                                 class="w-full"></x-jet-input>
+                    <x-jet-input-error for="model.title" class="mt-1"/>
+                </div>
+            </div>
+        </div>
+
+        <x-slot name="cancelbutton">
+            {{ __('Cancel') }}
+        </x-slot>
+        <x-slot name="button">
+            {{__('Save')}}
+        </x-slot>
+    </x-wire-modal>
+</div>

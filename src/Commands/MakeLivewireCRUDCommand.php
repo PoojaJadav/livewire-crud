@@ -13,7 +13,7 @@ class MakeLivewireCRUDCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'livewire:crud {model}';
+    protected $signature = 'livewire:crud {model} {--m}';
 
     /**
      * The console command description.
@@ -39,6 +39,7 @@ class MakeLivewireCRUDCommand extends Command
      */
     public function handle()
     {
+        $hasModal = $this->option('m');
         $model = ucfirst($this->argument('model'));
         $pluralModel = str_plural($model);
         $pluralDirectory = strtolower($pluralModel);
@@ -61,6 +62,7 @@ class MakeLivewireCRUDCommand extends Command
             '{{ pluralModel }}'     => $pluralModel,
             '{{ pluralDirectory }}' => $pluralDirectory,
             'DIRECTORY'             => $pluralDirectory,
+            '{{ manageTrait }}'     => $hasModal ? 'ManageModal' : 'ModelManager',
         ];
 
         // model, migration, seeder, factory
@@ -94,13 +96,20 @@ class MakeLivewireCRUDCommand extends Command
         // creating view files
         File::makeDirectory(resource_path("views/$pluralDirectory"), 0777, true, true);
 
-        $views = [
-            'create', 'edit', 'index', 'show', 'filters',
-        ];
+        if ($hasModal) {
+            $views = [
+                'modal-index' => 'index', 'show', 'filters',
+            ];
+        } else {
+            $views = [
+                'create', 'edit', 'index', 'show', 'filters',
+            ];
+        }
 
-        foreach ($views as $view) {
+        foreach ($views as $view => $name) {
+            $view = !is_numeric($view) ? $view : $name;
             File::put(
-                resource_path("views/$pluralDirectory/$view.blade.php"),
+                resource_path("views/$pluralDirectory/$name.blade.php"),
                 str_replace(array_keys($replace), array_values($replace), file_get_contents($stubFolder . "livewire/views/$view.stub"))
             );
         }
@@ -116,16 +125,28 @@ class MakeLivewireCRUDCommand extends Command
         File::put($componentPath . '/Index.php', str_replace(
             array_keys($replace), array_values($replace), file_get_contents($stubFolder . 'livewire/components/Index.stub')
         ));
+
         File::put($componentPath . '/Manage.php', str_replace(
             array_keys($replace), array_values($replace), file_get_contents($stubFolder . 'livewire/components/Manage.stub')
         ));
 
-        File::put($componentViewPath . '/index.blade.php', str_replace(
-            array_keys($replace), array_values($replace), file_get_contents($stubFolder . 'livewire/component-views/index.stub')
-        ));
-        File::put($componentViewPath . '/manage.blade.php', str_replace(
-            array_keys($replace), array_values($replace), file_get_contents($stubFolder . 'livewire/component-views/manage.stub')
-        ));
+        if ($hasModal) {
+            File::put($componentViewPath . '/index.blade.php', str_replace(
+                array_keys($replace), array_values($replace), file_get_contents($stubFolder . 'livewire/component-views/modal-index.stub')
+            ));
+
+            File::put($componentViewPath . '/manage.blade.php', str_replace(
+                array_keys($replace), array_values($replace), file_get_contents($stubFolder . 'livewire/component-views/modal-manage.stub')
+            ));
+        } else {
+            File::put($componentViewPath . '/index.blade.php', str_replace(
+                array_keys($replace), array_values($replace), file_get_contents($stubFolder . 'livewire/component-views/index.stub')
+            ));
+
+            File::put($componentViewPath . '/manage.blade.php', str_replace(
+                array_keys($replace), array_values($replace), file_get_contents($stubFolder . 'livewire/component-views/manage.stub')
+            ));
+        }
 
         if (!File::exists($path = app_path('Http/Livewire/WithSorting.php'))) {
             File::copy($stubFolder . 'livewire/traits/WithSorting.stub', $path);
@@ -133,6 +154,14 @@ class MakeLivewireCRUDCommand extends Command
 
         if (!File::exists($path = app_path('Http/Livewire/ModelManager.php'))) {
             File::copy($stubFolder . 'livewire/traits/ModelManager.stub', $path);
+        }
+
+        if (!File::exists($path = app_path('Http/Livewire/HasModal.php'))) {
+            File::copy($stubFolder . 'livewire/traits/HasModal.stub', $path);
+        }
+
+        if (!File::exists($path = app_path('Http/Livewire/ManageModal.php'))) {
+            File::copy($stubFolder . 'livewire/traits/ManageModal.stub', $path);
         }
 
         $this->info('Livewire components / views created successfully.');
