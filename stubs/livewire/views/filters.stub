@@ -4,7 +4,7 @@
             <label for="search" class="block text-sm font-medium text-gray-700">@lang('Search')</label>
             <div class="mt-1 relative rounded-md shadow-sm">
                 <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none" aria-hidden="true">
-                    <x-livewirecrud-search class="mr-3"/>
+                    <x-wire-search class="mr-3"/>
                 </div>
                 <input type="text" wire:model="search" name="search" id="search" class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-9 sm:text-sm border-gray-300 rounded-md" placeholder="Search">
             </div>
