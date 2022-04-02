@@ -28,7 +28,7 @@ php artisan livewire:crud Flight
 It'll generate model, factory, migration, seeder, controller,
 policy, view blade files, livewire components / views and route register on web.php.
 
-## Publish vendor
+## Publish Stubs
 
 If you need to overwrite the stubs, then you can publish them using the vendor:publish Artisan command:
 
