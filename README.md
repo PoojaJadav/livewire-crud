@@ -22,10 +22,11 @@ To get started, let's create CRUD from scratch:
 
 ````
 php artisan livewire:crud Flight
-````
-It'll generate model, factory, migration, seeder, controller,
-policy, view blade files, livewire components / views and route register on web.php. 
+```` 
 ![img.png](img.png)
+
+It'll generate model, factory, migration, seeder, controller,
+policy, view blade files, livewire components / views and route register on web.php.
 
 ## Publish vendor
 
@@ -34,3 +35,6 @@ If you need to overwrite the stubs, then you can publish them using the vendor:p
 ````
 php artisan livewire-crud:stubs
 ````
+
+#### Support
+- Stub created by [rj chauhan](https://github.com/rjchauhan)
