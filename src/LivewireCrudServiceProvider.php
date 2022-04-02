@@ -53,8 +53,8 @@ class LivewireCrudServiceProvider extends ServiceProvider
     protected function configureComponents()
     {
         $this->callAfterResolving(BladeCompiler::class, function () {
-            $this->registerComponent('search');
-            $this->registerComponent('sort');
+            $this->registerComponent('icons.search');
+            $this->registerComponent('icons.sort');
         });
     }
 
