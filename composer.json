@@ -1,38 +1,47 @@
 {
-    "name": "poojajadav/livewire-crud",
-    "description": "This will create full livewire CRUD.",
-    "type": "library",
-    "license": "MIT",
-    "autoload": {
-        "psr-4": {
-            "Poojajadav\\LivewireCrud\\": "src/"
-        }
-    },
-    "authors": [
-        {
-            "name": "Pooja Jadav",
-            "email": "56014892+PoojaJadav@users.noreply.github.com"
-        }
-    ],
-    "minimum-stability": "dev",
-    "require": {
-        "php": "^7.2|^8.1",
-        "symfony/http-kernel": "^5.0|^6.0",
-        "illuminate/support": "~5|~6|~7|~8|~9",
-        "laravel/helpers": "1.x-dev"
-    },
-    "require-dev": {
-        "laravel/framework": "^7.0|^8.0|^9.0",
-        "phpunit/phpunit": "^9.0",
-        "mockery/mockery": "^1.1",
-        "orchestra/testbench": "~3|~4|~5|~6",
-        "sempro/phpunit-pretty-print": "^1.0"
-    },
-    "extra": {
-        "laravel": {
-            "providers": [
-                "Poojajadav\\LivewireCrud\\LivewireCrudServiceProvider"
-            ]
-        }
+  "name": "poojajadav/livewire-crud",
+  "description": "This will create full livewire CRUD.",
+  "type": "library",
+  "license": "MIT",
+  "keywords": [
+    "livewire",
+    "crud"
+  ],
+  "homepage": "https://github.com/PoojaJadav",
+  "autoload": {
+    "psr-4": {
+      "Poojajadav\\LivewireCrud\\": "src/"
     }
+  },
+  "authors": [
+    {
+      "name": "Pooja Jadav",
+      "email": "contact2pooja36@gmail.com"
+    }
+  ],
+  "config": {
+    "sort-packages": true
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "require": {
+    "php": "^7.2|^8.1",
+    "symfony/http-kernel": "^5.0|^6.0",
+    "illuminate/support": "~5|~6|~7|~8|~9",
+    "laravel/helpers": "1.x-dev"
+  },
+  "require-dev": {
+    "laravel/framework": "^7.0|^8.0|^9.0",
+    "phpunit/phpunit": "^9.0",
+    "mockery/mockery": "^1.1",
+    "orchestra/testbench": "~3|~4|~5|~6",
+    "sempro/phpunit-pretty-print": "^1.0"
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Poojajadav\\LivewireCrud\\LivewireCrudServiceProvider"
+      ]
+    }
+  }
 }
