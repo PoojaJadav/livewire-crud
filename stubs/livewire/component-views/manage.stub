@@ -1,0 +1,32 @@
+<x-jet-form-section submit="submit">
+    <x-slot name="title">
+        @if($this->editing)
+            @lang('Edit {{ model }}')
+        @else
+            @lang('Create {{ model }}')
+        @endif
+    </x-slot>
+
+    <x-slot name="description">
+        {{ __('Fill in the form to save the record.') }}
+    </x-slot>
+
+    <x-slot name="form">
+        <!-- Title -->
+        <div class="col-span-6 sm:col-span-4">
+            <x-jet-label for="title" value="{{ __('Title') }}" />
+            <x-jet-input id="title" type="text" class="mt-1 block w-full" wire:model.defer="model.title"/>
+            <x-jet-input-error for="model.title" class="mt-2" />
+        </div>
+    </x-slot>
+
+    <x-slot name="actions">
+        <x-jet-action-message class="mr-3" on="saved">
+            {{ __('Saved.') }}
+        </x-jet-action-message>
+
+        <x-jet-button wire:loading.attr="disabled">
+            {{ __('Save') }}
+        </x-jet-button>
+    </x-slot>
+</x-jet-form-section>
