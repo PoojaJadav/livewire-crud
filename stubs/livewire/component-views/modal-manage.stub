@@ -1,5 +1,5 @@
 <div>
-    <x-wire-modal maxWidth="md" wire:model="show" submit="submit">
+    <x-wire-modal maxWidth="sm" wire:model="show" submit="submit">
         <x-slot name="title">
             @if($this->editing)
                 @lang('Edit {{ model }}')

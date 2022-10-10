@@ -1,5 +1,5 @@
 <div>
-    @include('{{ pluralDirectory }}.filters')
+    @include('{{ pluralDirectory }}._filters')
 
     <div class="mt-8 sm:block">
         <div class="align-middle inline-block min-w-full border-b border-gray-200">
@@ -31,8 +31,18 @@
                         <td class="hidden md:table-cell px-6 py-3 whitespace-nowrap text-sm text-gray-500 text-right">
                             {{ {{ variable }}->updated_at->format('F d, Y') }}
                         </td>
-                        <td class="px-6 py-3 whitespace-nowrap text-right text-sm font-medium">
-                            <a href="{{ route('{{ pluralDirectory }}.edit', {{ variable }}) }}" class="text-indigo-600 hover:text-indigo-900">Edit</a>
+                        <td class="px-6 py-3 whitespace-nowrap flex justify-end items-center space-x-2 text-sm font-medium">
+                            <a href="{{ route('{{ pluralDirectory }}.edit', {{ variable }}) }}" class="text-gray-400 hover:text-gray-700">
+                                <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                                </svg>
+                            </a>
+
+                            <button type="button" class="text-red-400 hover:text-red-700" wire:click="confirmDelete({{ {{ variable }}->id }})" wire:loading.attr="disabled">
+                                <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                </svg>
+                            </button>
                         </td>
                     </tr>
                 @endforeach
@@ -43,4 +53,6 @@
             {!! ${{ pluralDirectory }}->links() !!}
         </div>
     </div>
+
+    @include('{{ pluralDirectory }}._delete_confirmation_modal')
 </div>

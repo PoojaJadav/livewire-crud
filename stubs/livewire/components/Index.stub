@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\{{ pluralModel }};
 
+use App\Http\Livewire\Deletable;
 use App\Http\Livewire\WithSorting;
 use App\Models\{{ model }};
 use Livewire\Component;
@@ -9,7 +10,7 @@ use Livewire\WithPagination;
 
 class Index extends Component
 {
-    use WithSorting, WithPagination;
+    use WithSorting, WithPagination, Deletable;
 
     public $search;
 
@@ -30,5 +31,10 @@ class Index extends Component
                 ->latest()
                 ->paginate()
         ]);
+    }
+
+    protected function getModel($id)
+    {
+        return {{ model }}::findOrFail($id);
     }
 }

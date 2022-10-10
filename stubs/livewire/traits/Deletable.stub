@@ -1,0 +1,23 @@
+<?php
+
+namespace App\Http\Livewire;
+
+trait Deletable
+{
+    public $confirmingDeletion = false;
+
+    public $deletingModelId;
+
+    public function confirmDelete($id)
+    {
+        $this->confirmingDeletion = true;
+        $this->deletingModelId = $id;
+    }
+
+    public function destroy()
+    {
+        $this->getModel($this->deletingModelId)->delete();
+
+        $this->reset('confirmingDeletion', 'deletingModelId');
+    }
+}

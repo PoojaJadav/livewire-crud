@@ -97,11 +97,11 @@ class MakeLivewireCRUDCommand extends Command
 
         if ($hasModal) {
             $views = [
-                'modal-index' => 'index', 'show', 'filters',
+                'modal-index' => 'index', 'show', '_filters','_delete_confirmation_modal'
             ];
         } else {
             $views = [
-                'create', 'edit', 'index', 'show', 'filters',
+                'create', 'edit', 'index', 'show', '_filters','_delete_confirmation_modal'
             ];
         }
 
@@ -157,6 +157,10 @@ class MakeLivewireCRUDCommand extends Command
 
         if (!File::exists($path = app_path('Http/Livewire/HasModal.php'))) {
             File::copy($stubFolder . 'livewire/traits/HasModal.stub', $path);
+        }
+
+        if (!File::exists($path = app_path('Http/Livewire/Deletable.php'))) {
+            File::copy($stubFolder . 'livewire/traits/Deletable.stub', $path);
         }
 
         $this->info('Livewire components / views created successfully.');
